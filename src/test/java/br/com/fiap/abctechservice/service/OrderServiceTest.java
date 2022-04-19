@@ -1,5 +1,7 @@
 package br.com.fiap.abctechservice.service;
 
+import br.com.fiap.abctechservice.handler.exception.MaxAssistsException;
+import br.com.fiap.abctechservice.handler.exception.MinimumAssistsRequiredException;
 import br.com.fiap.abctechservice.model.Assistance;
 import br.com.fiap.abctechservice.model.Order;
 import br.com.fiap.abctechservice.repository.AssistanceRepository;
@@ -51,7 +53,7 @@ public class OrderServiceTest {
     public void create_order_error_minimum() throws Exception {
         Order newOrder = new Order();
         newOrder.setOperatorId(1234L);
-        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> orderService.saveOrder(newOrder, List.of()));
+        Assertions.assertThrows(MinimumAssistsRequiredException.class, () -> orderService.saveOrder(newOrder, List.of()));
         verify(orderRepository, times(0)).save(newOrder);
     }
 
@@ -59,7 +61,7 @@ public class OrderServiceTest {
     public void create_order_error_maximum() throws Exception {
         Order newOrder = new Order();
         newOrder.setOperatorId(1234L);
-        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> orderService.saveOrder(newOrder, generate_mock_assistance(20)));
+        Assertions.assertThrows(MaxAssistsException.class, () -> orderService.saveOrder(newOrder, generate_mock_assistance(20)));
         verify(orderRepository, times(0)).save(newOrder);
     }
 
