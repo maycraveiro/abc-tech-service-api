@@ -19,7 +19,7 @@ public class HealthCheckController {
 
     @GetMapping()
     public ResponseEntity<String> status() {
-        return ResponseEntity.ok("Subiu 22h00");
+        return ResponseEntity.ok("Sucesso");
     }
 
     @GetMapping("version")
