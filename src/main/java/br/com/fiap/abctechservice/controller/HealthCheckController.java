@@ -7,22 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 @RestController
 @RequestMapping("/")
 public class HealthCheckController {
 
-    private PropertiesComponent propertiesComponent;
+    private final PropertiesComponent propertiesComponent;
 
-    public HealthCheckController(@Autowired PropertiesComponent propertiesComponent){
+    public HealthCheckController(@Autowired PropertiesComponent propertiesComponent) {
         this.propertiesComponent = propertiesComponent;
     }
 
     @GetMapping()
-    public ResponseEntity<String> status() {return ResponseEntity.ok("Sucesso");}
+    public ResponseEntity<String> status() {
+        return ResponseEntity.ok("Subiu 22h00");
+    }
 
     @GetMapping("version")
     public ResponseEntity<String> version() {

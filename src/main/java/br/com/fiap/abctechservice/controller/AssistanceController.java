@@ -16,10 +16,8 @@ import java.util.List;
 public class AssistanceController {
 
     private final AssistanceApplication assistanceApplication;
-    public AssistanceController (
-            @Autowired
-                    AssistanceApplication assistanceApplication
-    ){
+
+    public AssistanceController(@Autowired AssistanceApplication assistanceApplication) {
         this.assistanceApplication = assistanceApplication;
     }
 

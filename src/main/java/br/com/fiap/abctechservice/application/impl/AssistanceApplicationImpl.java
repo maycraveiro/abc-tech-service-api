@@ -15,18 +15,13 @@ public class AssistanceApplicationImpl implements AssistanceApplication {
 
     private final AssistanceService assistanceService;
 
-    public AssistanceApplicationImpl(
-            @Autowired
-            AssistanceService assistanceService){
+    public AssistanceApplicationImpl(@Autowired AssistanceService assistanceService) {
         this.assistanceService = assistanceService;
     }
-
 
     @Override
     public List<AssistDto> getAssists() {
         List<Assistance> listAssists = this.assistanceService.getAssistsList();
-        return listAssists.stream().map(
-                assistance -> new AssistDto(assistance.getId(), assistance.getName(), assistance.getDescription())
-        ).collect(Collectors.toList());
+        return listAssists.stream().map(assistance -> new AssistDto(assistance.getId(), assistance.getName(), assistance.getDescription())).collect(Collectors.toList());
     }
 }

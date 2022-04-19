@@ -1,25 +1,17 @@
-package br.com.fiap.abctechservice.model;
+package br.com.fiap.abctechservice.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Date;
 
-
-@Entity
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderLocation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
+@Getter
+@Setter
+public class OrderLocationDto {
     private Double latitude;
     private Double longitude;
     private Date dateTime;
