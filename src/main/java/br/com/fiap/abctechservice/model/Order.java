@@ -6,23 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
-/**
- * {
- * "operator_id" : 0,
- * "services" : [1 , 2, 3],
- * "start" : {
- * "latitude" : 0.0,
- * "longitude" : 0.0,
- * "datetime" : "2022-02-19 00:00:00"
- * },
- * "end" : {
- * "latitude" : 0.0,
- * "longitude" : 0.0,
- * "datetime" : "2022-02-19 00:00:00"
- * }
- */
 @Entity
 @Table(name = "orders")
 @Getter
@@ -40,6 +26,7 @@ public class Order {
 
     @ManyToMany
     private List<Assistance> services;
+//    private List<Assistance> assistances;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "start_order_location_id", foreignKey = @ForeignKey(name = "FK_start_order_if"))
@@ -57,4 +44,5 @@ public class Order {
     public boolean exceedsMaxAssists() {
         return services.size() > 15;
     }
+
 }
