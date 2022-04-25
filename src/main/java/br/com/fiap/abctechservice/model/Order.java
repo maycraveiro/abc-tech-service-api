@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -36,7 +35,6 @@ public class Order {
     @JoinColumn(name = "end_order_location_id", foreignKey = @ForeignKey(name = "FK_end_order_if"))
     private OrderLocation endOrderLocation;
 
-
     public boolean hasMinAssists() {
         return services.size() > 0;
     }
@@ -44,5 +42,4 @@ public class Order {
     public boolean exceedsMaxAssists() {
         return services.size() > 15;
     }
-
 }

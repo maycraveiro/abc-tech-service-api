@@ -4,6 +4,7 @@ import br.com.fiap.abctechservice.handler.exception.MaxAssistsException;
 import br.com.fiap.abctechservice.handler.exception.MinimumAssistsRequiredException;
 import br.com.fiap.abctechservice.model.Assistance;
 import br.com.fiap.abctechservice.model.Order;
+import br.com.fiap.abctechservice.model.OrderLocation;
 import br.com.fiap.abctechservice.repository.AssistanceRepository;
 import br.com.fiap.abctechservice.repository.OrderRepository;
 import br.com.fiap.abctechservice.service.impl.OrderServiceImpl;
@@ -15,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +65,35 @@ public class OrderServiceTest {
         newOrder.setOperatorId(1234L);
         Assertions.assertThrows(MaxAssistsException.class, () -> orderService.saveOrder(newOrder, generate_mock_assistance(20)));
         verify(orderRepository, times(0)).save(newOrder);
+    }
+
+    @Test
+    public void validate_order_operatorId_is_null() throws Exception {
+        Order newOrder = new Order();
+        newOrder.setOperatorId(null);
+        orderService.saveOrder(newOrder, generate_mock_assistance(1));
+        Assertions.assertNull(newOrder.getOperatorId());
+    }
+
+    @Test
+    public void validate_order_start_latitude_is_null() throws Exception {
+        Order newOrder = new Order();
+        newOrder.setStartOrderLocation(new OrderLocation(1L, null, null, new Date()));
+        Assertions.assertNull(newOrder.getStartOrderLocation().getLatitude());
+    }
+
+    @Test
+    public void validate_order_start_longitude_is_null() throws Exception {
+        Order newOrder = new Order();
+        newOrder.setStartOrderLocation(new OrderLocation(1L, null, null, new Date()));
+        Assertions.assertNull(newOrder.getStartOrderLocation().getLongitude());
+    }
+
+    @Test
+    public void validate_order_start_date_is_null() throws Exception {
+        Order newOrder = new Order();
+        newOrder.setStartOrderLocation(new OrderLocation(1L, null, null, null));
+        Assertions.assertNull(newOrder.getStartOrderLocation().getDate());
     }
 
     private List<Long> generate_mock_assistance(int number) {
