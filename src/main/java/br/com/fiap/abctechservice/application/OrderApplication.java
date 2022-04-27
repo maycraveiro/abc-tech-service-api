@@ -5,6 +5,7 @@ import br.com.fiap.abctechservice.application.dto.OrderResponseDto;
 
 public interface OrderApplication {
 
+    OrderResponseDto getOrder(Long id);
+
     void createOrder(OrderDto orderDto);
-//    public OrderResponseDto getOrder(Long id);
 }

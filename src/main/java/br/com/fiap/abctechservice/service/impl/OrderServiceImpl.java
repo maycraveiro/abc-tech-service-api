@@ -42,13 +42,8 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
-//    @Override
-//    public List<Order> listOrdersByOperator(Long operatorId) {
-//        return null;
-//    }
-
     @Override
-    public Order getOrderById(Long orderId){
+    public Order getOrderById(Long orderId) {
         return orderRepository.findById(orderId).orElseThrow();
     }
 }

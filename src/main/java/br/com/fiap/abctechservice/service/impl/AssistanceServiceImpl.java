@@ -13,10 +13,7 @@ public class AssistanceServiceImpl implements AssistanceService {
 
     private final AssistanceRepository repository;
 
-    public AssistanceServiceImpl(
-            @Autowired
-            AssistanceRepository repository
-    ){
+    public AssistanceServiceImpl(@Autowired AssistanceRepository repository) {
         this.repository = repository;
     }
 

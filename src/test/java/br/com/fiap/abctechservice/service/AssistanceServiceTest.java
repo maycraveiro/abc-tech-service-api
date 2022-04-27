@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class AssistanceServiceTest {
@@ -29,14 +29,11 @@ public class AssistanceServiceTest {
     }
 
     @Test
-    public void test_list_success(){
+    public void test_list_success() {
         Assistance itemAssist = new Assistance(1L, "Mock Name", "Mock Description");
         Assistance itemAssist2 = new Assistance(2L, "Mock Name 2", "Mock Description 2");
-
-        when(assistanceRepository.findAll()).thenReturn(List.of(itemAssist,itemAssist2));
-
+        when(assistanceRepository.findAll()).thenReturn(List.of(itemAssist, itemAssist2));
         List<Assistance> values = assistanceService.getAssistsList();
-
         Assertions.assertEquals(values.size(), 2);
         Assertions.assertSame(values.get(0), itemAssist);
         Assertions.assertSame(values.get(1), itemAssist2);
@@ -44,11 +41,9 @@ public class AssistanceServiceTest {
     }
 
     @Test
-    public void test_list_empty(){
+    public void test_list_empty() {
         when(assistanceRepository.findAll()).thenReturn(List.of());
-
         List<Assistance> values = assistanceService.getAssistsList();
-
         Assertions.assertEquals(values.size(), 0);
     }
 }

@@ -32,12 +32,13 @@ public class OrderApplicationImpl implements OrderApplication {
         this.orderService.saveOrder(order, orderDto.getServices());
     }
 
-//    public OrderResponseDto getOrder(Long id) {
-//        Order order = this.orderService.getOrderById(id);
-//        List<AssistDto> assistDtoList = order.getAssistances().stream().map(assistance -> new AssistDto(assistance.getId(), assistance.getName(), assistance.getDescription())).collect(Collectors.toList());
-//        OrderResponseDto orderDto = new OrderResponseDto(order.getId(), order.getOperatorId(), assistDtoList, this.getOrderLocationDtoFromOrderLocation(order.getStartOrderLocation()), this.getOrderLocationDtoFromOrderLocation(order.getEndOrderLocation()));
-//        return orderDto;
-//    }
+    @Override
+    public OrderResponseDto getOrder(Long id) {
+        Order order = this.orderService.getOrderById(id);
+        List<AssistDto> assistDtoList = order.getServices().stream().map(assistance -> new AssistDto(assistance.getId(), assistance.getName(), assistance.getDescription())).collect(Collectors.toList());
+        OrderResponseDto orderDto = new OrderResponseDto(order.getId(), order.getOperatorId(), assistDtoList, this.getOrderLocationDtoFromOrderLocation(order.getStartOrderLocation()), this.getOrderLocationDtoFromOrderLocation(order.getEndOrderLocation()));
+        return orderDto;
+    }
 
     private OrderLocation getOrderLocationFromOrderLocationDto(OrderLocationDto orderLocationDto) {
         OrderLocation location = new OrderLocation();

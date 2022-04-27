@@ -25,7 +25,6 @@ public class Order {
 
     @ManyToMany
     private List<Assistance> services;
-//    private List<Assistance> assistances;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "start_order_location_id", foreignKey = @ForeignKey(name = "FK_start_order_if"))
